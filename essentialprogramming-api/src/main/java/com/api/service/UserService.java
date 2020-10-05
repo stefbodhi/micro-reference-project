@@ -73,7 +73,6 @@ public class UserService {
         Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isPresent()) {
-            MDC.put("orderId", email);
             logger.info("User loaded={}",email);
             return UserMapper.userToJson(user.get());
         } else
