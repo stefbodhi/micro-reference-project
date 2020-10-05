@@ -1,6 +1,6 @@
 package com.templates;
 
-import com.api.env.resources.DishResources;
+import com.api.env.resources.AppResources;
 import com.util.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class EmailTemplateService {
                     "Mandatory non-null parameters: content, recipient, subject, template");
         }
 
-        content.putIfAbsent("APP_URL", DishResources.APP_URL.value());
+        content.putIfAbsent("APP_URL", AppResources.APP_URL.value());
         emailService.sendMail(recipient, subject, templateService.generateHTML(content, template, locale));
     }
 }

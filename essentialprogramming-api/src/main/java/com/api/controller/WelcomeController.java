@@ -6,6 +6,7 @@ import com.exception.ExceptionHandler;
 import com.util.async.Computation;
 import com.util.enums.Language;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +18,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.ExecutorService;
 
@@ -54,5 +57,42 @@ public class WelcomeController {
 
     private Language test() throws IOException {
         return language;
+    }
+
+    @GET
+    @Path("/questions")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Anonymous
+    public List<QuestionJSON> getQuestionsByQuiz() {
+
+        QuestionJSON question = QuestionJSON.builder()
+                .question("Who invented JavaScript?")
+                .answers(Arrays.asList("Douglas Crockford", "Sheryl Sandberg", "Brendan Eich"))
+                .correctAnswer("c")
+                .build();
+
+        QuestionJSON question2 = QuestionJSON.builder()
+                .question("Which one of these is a JavaScript package manager?")
+                .answers(Arrays.asList("Node.js", "TypeScript", "npm"))
+                .correctAnswer("c")
+                .build();
+
+
+        return Arrays.asList(question, question2);
+
+    }
+
+    @Builder
+    @Getter
+    @Setter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class QuestionJSON {
+
+        private int id;
+        private String question;
+        private String correctAnswer;
+        private String quiz;
+        private List<String> answers;
     }
 }

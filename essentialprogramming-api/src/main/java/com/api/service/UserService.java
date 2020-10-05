@@ -1,7 +1,7 @@
 package com.api.service;
 
 import com.api.entities.*;
-import com.api.env.resources.DishResources;
+import com.api.env.resources.AppResources;
 import com.api.mapper.UserMapper;
 import com.api.model.*;
 import com.api.output.UserJSON;
@@ -14,6 +14,7 @@ import com.templates.EmailTemplateService;
 import com.templates.Template;
 import com.util.enums.HTTPCustomStatus;
 import com.util.exceptions.ApiException;
+import org.apache.log4j.MDC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +47,9 @@ public class UserService {
         User result = saveUser(user, input, language);
 
         String validationKey = Crypt.encrypt(result.getUserKey(), Crypt.encrypt(result.getUserKey(), result.getUserKey()));
-        String encryptedUserKey = Crypt.encrypt(user.getUserKey(), DishResources.ENCRYPTION_KEY.value());
+        String encryptedUserKey = Crypt.encrypt(user.getUserKey(), AppResources.ENCRYPTION_KEY.value());
 
-        String url = DishResources.ACCOUNT_CONFIRMATION_URL.value() + "/" + validationKey + "/" + encryptedUserKey;
+        String url = AppResources.ACCOUNT_CONFIRMATION_URL.value() + "/" + validationKey + "/" + encryptedUserKey;
 
         Map<String, Object> templateKeysAndValues = new HashMap<>();
         templateKeysAndValues.put("fullName", user.getFullName());
@@ -72,6 +73,8 @@ public class UserService {
         Optional<User> user = userRepository.findByEmail(email);
 
         if (user.isPresent()) {
+            MDC.put("orderId", email);
+            logger.info("User loaded={}",email);
             return UserMapper.userToJson(user.get());
         } else
             throw new ApiException(Messages.get("USER.NOT.FOUND", language), HTTPCustomStatus.BUSINESS_VALIDATION_ERROR);

@@ -100,9 +100,9 @@ public class TokenService {
 
         //3. JWT Payload or claims
         JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder()
-                .issuer("Dish Auth Service")
+                .issuer("Essential Programming Auth Service")
                 .claim("user_id", userId)
-                .audience("Dish Services")
+                .audience("Essential Programming Services")
                 .expirationTime(expirationTime) // expires in 30 minutes
                 .notBeforeTime(Date.from(now))
                 .issueTime(Date.from(now))

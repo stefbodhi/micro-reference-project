@@ -1,7 +1,7 @@
 package com.config;
 
 
-import com.api.env.resources.DishResources;
+import com.api.env.resources.AppResources;
 import com.util.cloud.ConfigurationManager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -16,6 +16,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -37,9 +38,9 @@ public class JPAConfig {
         config.setMaxLifetime(1800000);
         config.setDriverClassName(com.mysql.cj.jdbc.Driver.class.getName());
 
-        config.setJdbcUrl(DishResources.DB_HOSTNAME.value());
-        config.setUsername(DishResources.DB_USER.value());
-        config.setPassword(DishResources.DB_PASSWORD.value());
+        config.setJdbcUrl(AppResources.DB_HOSTNAME.value());
+        config.setUsername(AppResources.DB_USER.value());
+        config.setPassword(AppResources.DB_PASSWORD.value());
 
 
         return new HikariDataSource(config);
@@ -50,10 +51,21 @@ public class JPAConfig {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(hikariDataSource());
         factoryBean.setPackagesToScan("com.api.entities","com.authentication.identityprovider.internal.entities");
+        factoryBean.setJpaProperties(properties());
+
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        vendorAdapter.setShowSql(true);
+        //vendorAdapter.setShowSql(true); //DON'T USE THIS. USE log4j to configure log level of SQL statements
+
         factoryBean.setJpaVendorAdapter(vendorAdapter);
         return factoryBean;
+    }
+
+    private Properties properties() {
+        Properties properties = new Properties();
+        //properties.setProperty("hibernate.show_sql", "true"); //DON'T USE THIS. USE log4j to configure log level of SQL statements
+        properties.setProperty("hibernate.format_sql", "true");
+
+        return properties;
     }
 
     @Bean

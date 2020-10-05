@@ -15,14 +15,14 @@ public class Server {
 		final String  host = getProperty("undertow.host", "0.0.0.0");
 		final Integer port = getProperty("undertow.port", 8080);
 
-		final UndertowServer server = new UndertowServer(host, port, "dish.jar");
+		final UndertowServer server = new UndertowServer(host, port, "essentialProgramming.jar");
 		
 		final Condition newCondition = server.LOCK.newCondition();
 		
 		server.start();
 		try {
 			while( true )
-				newCondition.awaitNanos(1);
+				newCondition.awaitNanos(100000000);
 		} catch ( InterruptedException cause ) {
 			server.stop();
 		}

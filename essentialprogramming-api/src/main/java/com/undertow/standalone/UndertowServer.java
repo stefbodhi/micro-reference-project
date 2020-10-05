@@ -10,6 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import javax.servlet.ServletException;
 
+import com.api.controller.DemoQuizServlet;
 import com.authentication.config.ApplicationConfig;
 
 import io.undertow.servlet.api.InstanceFactory;
@@ -77,7 +78,10 @@ public final class UndertowServer {
                                 .addInitParam("javax.ws.rs.Application", ApplicationConfig.class.getName())
                                 .addMapping("/api/auth/*")
                                 .setLoadOnStartup(1)
-                                .setAsyncSupported(true)
+                                .setAsyncSupported(true),
+                        servlet("quiz", DemoQuizServlet.class)
+                                .addMapping("/quiz/*")
+                                .setLoadOnStartup(1)
 
                 );
 

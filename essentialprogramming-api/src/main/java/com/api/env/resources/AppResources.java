@@ -3,10 +3,10 @@ package com.api.env.resources;
 import com.util.cloud.ConfigurationManager;
 
 /**
- * Dish external resources
+ * Application external resources
  */
 @SuppressWarnings("unchecked")
-public enum DishResources {
+public enum AppResources {
 
     /**
      * Url to be sent in the confirmation email.

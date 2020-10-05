@@ -1,6 +1,6 @@
 package com.authentication.identityprovider.internal.service;
 
-import com.api.env.resources.DishResources;
+import com.api.env.resources.AppResources;
 import com.authentication.identityprovider.internal.entities.*;
 import com.authentication.identityprovider.AuthenticationProvider;
 import com.authentication.identityprovider.internal.model.PasswordInput;
@@ -28,7 +28,7 @@ import java.io.Serializable;
 import java.security.GeneralSecurityException;
 import java.util.*;
 
-import static com.api.env.resources.DishResources.OTP_LOGIN_URL;
+import static com.api.env.resources.AppResources.OTP_LOGIN_URL;
 
 
 @Service
@@ -76,7 +76,7 @@ public class AccountService implements AuthenticationProvider {
 
     public Serializable setPassword(PasswordInput passwordInput, Language language) throws GeneralSecurityException, ApiException, PasswordException {
 
-        String decryptedUserKey = Crypt.decrypt(passwordInput.getKey(), DishResources.ENCRYPTION_KEY.value());
+        String decryptedUserKey = Crypt.decrypt(passwordInput.getKey(), AppResources.ENCRYPTION_KEY.value());
         Optional<Account> account = accountRepository.findByUserKey(decryptedUserKey);
 
         if (!account.isPresent()) {

@@ -48,9 +48,9 @@ public class ApplicationConfig extends ResourceConfig {
         OpenAPI openAPI = new OpenAPI()
                 .components(new Components())
                 .info(new Info()
-                        .title("Es API")
+                        .title("Essential Programming API")
                         .description(
-                                "Dish endpoints using OpenAPI 3.0")
+                                "Essential Programming endpoints using OpenAPI 3.0")
                         .version("v1")
                 )
                 .schemaRequirement("Bearer", new SecurityScheme()

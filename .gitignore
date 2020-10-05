@@ -15,7 +15,11 @@
 *.war
 *.ear
 
+package-lock.json
+
 
 # Ignore everything in this directory
 target/
 logs/
+node/
+node_modules

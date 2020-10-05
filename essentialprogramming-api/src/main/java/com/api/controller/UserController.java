@@ -68,7 +68,6 @@ public class UserController {
 
     private Serializable createUser(UserInput userInput, Language language) throws GeneralSecurityException, ApiException {
         boolean isValid = userService.checkAvailabilityByEmail(userInput.getEmail());
-       //TODO Is valid if available OR is already taken but not active, not validated and validation period expired
         if (isValid) {
             return userService.save(userInput, language);
 

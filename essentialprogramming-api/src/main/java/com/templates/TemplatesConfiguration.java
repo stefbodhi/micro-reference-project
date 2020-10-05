@@ -12,7 +12,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.Collections;
 
-import static com.api.env.resources.DishResources.SENDGRID_API_KEY;
+import static com.api.env.resources.AppResources.SENDGRID_API_KEY;
 
 @Configuration
 public class TemplatesConfiguration {
