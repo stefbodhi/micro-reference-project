@@ -18,7 +18,7 @@ window.onload = function () {
 }
 
 docReady(async function () {
-    let lang = 'de'
+    let lang = 'en'
     let urlLang = `../assets/i18n/${lang}.json`;
     let responseLang = await fetch(urlLang)
         .then(res => res.json())
@@ -41,11 +41,12 @@ docReady(async function () {
 
     });
 
+    let greet = i18next.t('greet');
     let a = i18next.t('title');
     let name = Utils.getRequestParameter("name");
     let userName = document.querySelector('.userName');
-    sessionStorage.username = name;
-    userName.innerText = sessionStorage.username + " " + a;
+    sessionStorage.username = name != null ? name : "stranger";
+    userName.innerText = greet + sessionStorage.username + " " + a;
 
 
     questions = transformJson(await getQuestions());

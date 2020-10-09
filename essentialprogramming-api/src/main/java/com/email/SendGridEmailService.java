@@ -1,4 +1,4 @@
-package com.templates;
+package com.email;
 
 import com.sendgrid.Method;
 import com.sendgrid.Request;

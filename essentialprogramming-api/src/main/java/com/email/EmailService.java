@@ -1,4 +1,4 @@
-package com.templates;
+package com.email;
 
 public interface EmailService {
 

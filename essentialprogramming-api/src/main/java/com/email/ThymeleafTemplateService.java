@@ -1,4 +1,4 @@
-package com.templates;
+package com.email;
 
 import com.lowagie.text.DocumentException;
 import com.util.exceptions.ServiceException;

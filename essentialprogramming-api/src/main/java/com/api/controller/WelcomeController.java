@@ -66,14 +66,14 @@ public class WelcomeController {
     public List<QuestionJSON> getQuestionsByQuiz() {
 
         QuestionJSON question = QuestionJSON.builder()
-                .question("Who invented JavaScript?")
-                .answers(Arrays.asList("Douglas Crockford", "Sheryl Sandberg", "Brendan Eich"))
+                .question("Why are you here ?")
+                .answers(Arrays.asList("Don't know", "Looking around", "I want to build an awesome app"))
                 .correctAnswer("c")
                 .build();
 
         QuestionJSON question2 = QuestionJSON.builder()
-                .question("Which one of these is a JavaScript package manager?")
-                .answers(Arrays.asList("Node.js", "TypeScript", "npm"))
+                .question("What's next ?")
+                .answers(Arrays.asList("Leave this page", "Get a coffee", "Build an awesome app"))
                 .correctAnswer("c")
                 .build();
 

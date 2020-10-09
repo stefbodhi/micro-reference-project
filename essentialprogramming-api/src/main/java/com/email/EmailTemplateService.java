@@ -1,4 +1,4 @@
-package com.templates;
+package com.email;
 
 import com.api.env.resources.AppResources;
 import com.util.exceptions.ServiceException;
