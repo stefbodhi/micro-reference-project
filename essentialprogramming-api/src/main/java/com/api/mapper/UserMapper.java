@@ -1,8 +1,10 @@
 package com.api.mapper;
 
 import com.api.entities.User;
+import com.api.entities.Vehicle;
 import com.api.model.UserInput;
 import com.api.output.UserJSON;
+import com.api.output.VehicleJSON;
 
 
 public class UserMapper {
@@ -25,6 +27,13 @@ public class UserMapper {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .phone(user.getPhone())
+                .build();
+    }
+
+    public static VehicleJSON vehicleToJson(Vehicle vehicle) {
+        return VehicleJSON.builder()
+                .model(vehicle.getModel())
+                .plate(vehicle.getPlate())
                 .build();
     }
 

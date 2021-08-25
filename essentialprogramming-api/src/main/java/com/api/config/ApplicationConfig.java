@@ -35,6 +35,7 @@ public class ApplicationConfig extends ResourceConfig {
         register(WelcomeController.class);
         register(SecurityFeature.class);
         register(MultiPartFeature.class);
+        register(VehicleController.class);
 
         register(new AbstractBinder(){
             @Override
